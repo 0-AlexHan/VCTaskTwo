@@ -10,35 +10,29 @@ import UIKit
 class SecondViewController: UIViewController {
 
     @IBOutlet private weak var secondVCTextField: UITextField!
-    private var passedText: String?
+    var passedText: String?
+    var didPassTextBack: ((_ text: String?) -> Void)?
     
-    var secondVCDelegate: PassingDataDelegate!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         secondVCTextField.delegate = self
         secondVCTextField.text = passedText
     }
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        self.navigationController?.popViewController(animated: true)
-        secondVCDelegate.didPassText(inTextField: secondVCTextField)
-        return true
-    }
+    
     
 }
 
-extension SecondViewController: PassingDataDelegate, UITextFieldDelegate {
-       
-    func didPassText(inTextField: UITextField) {
-        passedText = inTextField.text
-        
-    }
+extension SecondViewController: UITextFieldDelegate {
     
-    func didChange(backgroundColor color: UIColor) {
-        self.view.backgroundColor = color
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        didPassTextBack?(secondVCTextField.text)
+        self.navigationController?.popViewController(animated: true)
+        
+        return true
     }
 }
 

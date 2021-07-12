@@ -100,7 +100,7 @@
         <!--SecondViewController-->
         <scene sceneID="wWO-bS-QhP">
             <objects>
-                <viewController storyboardIdentifier="SecondVC" title="SecondViewController" id="Yjw-os-tUU" customClass="SecondViewController" customModule="VCTaskTwo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SecondViewController" title="SecondViewController" id="Yjw-os-tUU" customClass="SecondViewController" customModule="VCTaskTwo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Df1-D8-M9T">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

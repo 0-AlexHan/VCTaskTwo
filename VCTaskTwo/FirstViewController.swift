@@ -14,8 +14,8 @@ class FirstViewController: UIViewController {
     @IBOutlet private weak var greenButton: UIButton!
     @IBOutlet private weak var blueButton: UIButton!
     
-    
-    private let viewControllerID = "SecondVC"
+    // нашел такой вариант. Но по факту же все равно используется идентификатор. А как без идентификатора вообще сделать - не нашел. Разве что весь UI прописать в коде.
+    private let viewControllerID = String(describing: SecondViewController.self)
     
     
     
@@ -31,42 +31,40 @@ class FirstViewController: UIViewController {
     }
     
     @IBAction func didTapPushGreen(_ sender: Any) {
-        if let color = redButton.backgroundColor {
+        if let color = greenButton.backgroundColor {
             performPush(viewControllerWithID: viewControllerID, color: color, andText: firstVCTextField)
         }
     }
     
     @IBAction func didTapPushBlue(_ sender: Any) {
-        if let color = redButton.backgroundColor {
+        if let color = blueButton.backgroundColor {
             performPush(viewControllerWithID: viewControllerID, color: color, andText: firstVCTextField)
         }
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
+   
     
     func performPush(viewControllerWithID: String, color: UIColor, andText: UITextField) {
         
         if let viewController =  storyboard?.instantiateViewController(identifier: viewControllerID) as? SecondViewController {
-            viewController.secondVCDelegate = self
+                        
+            viewController.passedText = firstVCTextField.text
+            viewController.didPassTextBack = { text in
+                self.firstVCTextField.text = text
+            }
+            
+            viewController.view.backgroundColor = color
             
             self.navigationController?.pushViewController(viewController, animated: true)
-            viewController.didPassText(inTextField: firstVCTextField)
-            viewController.didChange(backgroundColor: color)
         }
     }    
 }
 
 
-extension FirstViewController: PassingDataDelegate, UITextFieldDelegate {
-       
-    func didPassText(inTextField: UITextField) {
-        firstVCTextField.text = inTextField.text
+extension FirstViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
-    
-    func didChange(backgroundColor color: UIColor) {
-        self.view.backgroundColor = color
-    }
+   
 }
