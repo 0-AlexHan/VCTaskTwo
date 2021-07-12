@@ -25,15 +25,21 @@ class FirstViewController: UIViewController {
     }
 
     @IBAction func didTapPushRed(_ sender: Any) {
-        performPush(viewControllerWithID: viewControllerID, color: redButton.backgroundColor!, andText: firstVCTextField)
+        if let color = redButton.backgroundColor {
+            performPush(viewControllerWithID: viewControllerID, color: color, andText: firstVCTextField)
+        }
     }
     
     @IBAction func didTapPushGreen(_ sender: Any) {
-        performPush(viewControllerWithID: viewControllerID, color: greenButton.backgroundColor!, andText: firstVCTextField)
+        if let color = redButton.backgroundColor {
+            performPush(viewControllerWithID: viewControllerID, color: color, andText: firstVCTextField)
+        }
     }
     
     @IBAction func didTapPushBlue(_ sender: Any) {
-        performPush(viewControllerWithID: viewControllerID, color: blueButton.backgroundColor!, andText: firstVCTextField)
+        if let color = redButton.backgroundColor {
+            performPush(viewControllerWithID: viewControllerID, color: color, andText: firstVCTextField)
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
